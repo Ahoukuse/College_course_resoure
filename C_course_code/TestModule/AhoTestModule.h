@@ -29,7 +29,7 @@ FILE *in_set;
 
 
 #define INIT out_set=fopen("out.data","w+");\
-             in_set=fopen("in.data","r");
+             in_set=fopen("in.data","w+");
 #define DROP fclose(out_set);\
              fclose(in_set);
 

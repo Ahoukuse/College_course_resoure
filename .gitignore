@@ -17,3 +17,5 @@ CMakeCache.txt
 
 test*.c
 test*.cpp
+*.data
+!in.data
