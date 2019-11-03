@@ -21,4 +21,4 @@ define_property(
                 FULL_DOCS "要啥FULL_DOCS"
 )
 
-add_executable(C_course ${f})
+add_executable(C_course TestModule/AhoTestModule.c ${f})
