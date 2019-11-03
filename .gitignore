@@ -5,3 +5,15 @@
 # 忽略Cmake文件
 
 debug_build/
+CMakeFiles/
+CMakeCache.txt
+
+
+# 忽略Viual Studio Code Config folder
+
+.vscode/
+
+# 忽略测试文件
+
+test*.c
+test*.cpp
