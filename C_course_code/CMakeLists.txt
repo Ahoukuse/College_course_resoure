@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(C_course)
 
-
+add_definitions("-DLocalhost")
 
 option(Debug 
        "是否开启Debug编译,其实就是启用一个宏'Debug'"
