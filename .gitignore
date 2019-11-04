@@ -19,3 +19,5 @@ test*.c
 test*.cpp
 *.data
 !in.data
+
+debug-build/

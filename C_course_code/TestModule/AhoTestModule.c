@@ -45,6 +45,35 @@ int Gen_int(int base,int len,int row,int column){
     return 0;
 }
 
+int Gen_sint(int base, int offset,unsigned seed) {
+	srand(seed);
+	return rand()%offset + base;
+}
+
+char* Gen_schar(int len,char* tmp,unsigned seed) {
+	if (tmp == NULL) {
+		return NULL;
+	}
+	srand(seed);
+	for (size_t i = 0; i < len; i++)
+	{
+		
+		tmp[i] = 'a' + rand() % 25;
+	}
+	return tmp;
+}
+
+int Gen_data(FILE *fp,char *format, ...) {
+	
+	va_list args;
+	va_start(args, format);
+
+	vfprintf(fp, format,args);
+	fprintf(fp,"\n");
+	va_end(args);
+	return 0;
+}
+
 void Static_analyze(char *checkfile,int num,int flag){
 #ifdef Debug
     
@@ -77,27 +106,27 @@ void Static_analyze(char *checkfile,int num,int flag){
         switch (flag)
         {
         case 0x01:
-            logg("-----数据[%03lu]-----\n",i+1);
+            //logg("-----数据[%03lu]-----\n",i+1);
             if(strcmp(tmp,tbcheck)){
-                logg("期望输出 %s\n",tmp);
-                loggerr("实际输出 %s错误!\n",tbcheck);
+                logg("期望输出 %s \n",tmp);
+                logg("实际输出 %s 错误!\n",tbcheck);
             }
             break;
         case 0x10:
             logg("-----数据[%03lu]-----\n",i+1);
             if(!strcmp(tmp,tbcheck)){
                 logg("期望输出 %s\n",tmp);
-                loggcyan("实际输出 %s正确!\n",tbcheck);
+                logg("实际输出 %s正确!\n",tbcheck);
             }
             break;
         case 0x11:
             logg("-----数据[%03lu]-----\n",i+1);
             if(!strcmp(tmp,tbcheck)){
                 logg("期望输出 %s\n",tmp);
-                loggcyan("实际输出 %s正确!\n",tbcheck);
+                logg("实际输出 %s正确!\n",tbcheck);
             } else {
                 logg("期望输出 %s\n",tmp);
-                loggerr("实际输出 %s错误!\n",tbcheck);
+                logg("实际输出 %s错误!\n",tbcheck);
             }
             break;
         default:
