@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.10)
 project(C_course)
 
 add_definitions("-DLocalhost")
-
 option(Debug 
        "是否开启Debug编译,其实就是启用一个宏'Debug'"
        ON)
@@ -22,3 +21,5 @@ define_property(
 )
 
 add_executable(C_course TestModule/AhoTestModule.c ${f})
+
+target_link_libraries(C_course m)

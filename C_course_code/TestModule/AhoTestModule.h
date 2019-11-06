@@ -1,8 +1,39 @@
+/*----------------------------------------------------------------
+|                                                                 |
+|       https://github.com/Ahoukuse/College_course_resoure        |                                          |
+|                                                                 |
+\*---------------------------------------------------------------*\
+
+
+/*
+
+    本模块在
+          OS: Ubuntu19.10
+          Arc: x64
+          gcc: 8.3.0
+    编译通过
+
+    本模块在
+         OS: Windows10 
+         Arc: x64
+         Env: Visual Studio 2019
+    编译通过
+
+    
+    >>>>>>>> 但本模块并不兼容目前也不打算兼容或支持Windows <<<<<<<<<<
+ 
+*/
+
+
 /*
 
     测试模块 
-
+    待完成
+    极不稳定
+            ---fengg
 */
+
+//我全都要.gif
 
 #ifndef _STDIO_H
 #include <stdio.h>
@@ -26,9 +57,15 @@
 
 
 
+/*
 
+    若在非"Debug"预编译宏的修饰下，将所以Debug宏
+    定义为空。
+    虽然不专业，但方便啊！！！
 
-#if defined Localhost && !defined Debug
+*/
+
+#ifndef Debug
 #define CURRENT_LOOP 
 #define INIT 
 #define DROP 
@@ -37,16 +74,32 @@
 #define loggcyan(x,...)
 #define TEST_SECTION_BEGIN(x)
 #define TEST_SECTION_END
-#endif // Localhost
+#endif 
 
+///
+///随机字符生产器  >>>弃用<<<
+///
 int Gen_char(int len,int times);
+
+///
+///随机数生产器    >>>弃用<<<
+///
 int Gen_int(int base,int len,int row,int column);
 
-#define SHOWERR   0x01
-#define SHOWCURR  0x10
+int Gen_data();
+
+#define SHOWERR   0x01  //显示错误
+#define SHOWCURR  0x10  //显示正确
+
+
+//若在"Debug"预编译宏修饰下,定义所以Debug宏
 
 #ifdef Debug
 
+/// >>>>>>>>>>>>>>弃用<<<<<<<<<<<<<<<
+/// 以下两个宏定义输入输出文件。用于测试数据输入
+/// 输出.       
+/// >>>>>>>>>>>>>>弃用<<<<<<<<<<<<<<<
 #define OUT_DATA_FILE_NAME "out.data"
 #define IN_DATA_FILE_NAME  "in.data"
 
@@ -55,9 +108,14 @@ int Gen_int(int base,int len,int row,int column);
 FILE *out_set;
 FILE *in_set;
 
-
+///
+/// 初始化测试环境
+///
 #define INIT out_set=fopen(OUT_DATA_FILE_NAME,"w");\
              in_set=fopen(IN_DATA_FILE_NAME,"r");
+
+
+
 #define DROP fclose(out_set);\
              fclose(in_set);
 
