@@ -2,7 +2,7 @@
 |                                                                 |
 |       https://github.com/Ahoukuse/College_course_resoure        |                                          |
 |                                                                 |
-\*---------------------------------------------------------------*\
+|----------------------------------------------------------------*/
 
 
 /*
@@ -73,6 +73,7 @@
 #define loggerr(x,...)
 #define loggcyan(x,...)
 #define TEST_SECTION_BEGIN(x)
+#define custom_data(x,format,...)
 #define TEST_SECTION_END
 #endif 
 
@@ -87,7 +88,8 @@ int Gen_char(int len,int times);
 int Gen_int(int base,int len,int row,int column);
 
 int Gen_data();
-
+int Ran_int(unsigned seed,int base,unsigned len);
+char* Ran_char(unsigned seed,int len);
 #define SHOWERR   0x01  //显示错误
 #define SHOWCURR  0x10  //显示正确
 
@@ -111,15 +113,15 @@ FILE *in_set;
 ///
 /// 初始化测试环境
 ///
-#define INIT out_set=fopen(OUT_DATA_FILE_NAME,"w");\
-             in_set=fopen(IN_DATA_FILE_NAME,"r");
-
+#define INIT out_set=fopen(OUT_DATA_FILE_NAME,"r+");\
+             in_set=fopen(IN_DATA_FILE_NAME,"r+");  \
 
 
 #define DROP fclose(out_set);\
              fclose(in_set);
 
-
+#define custom_data(x,format,...) for(size_t SEED = 0; SEED < (x); SEED++){fprintf(in_set,format,##__VA_ARGS__);}fseek(in_set,0,0);    
+                                                               
 
 #define loggl(format,...) fprintf(stdout,"[第%03d行] ",__LINE__);fprintf(stdout,format,##__VA_ARGS__)
 

@@ -14,8 +14,11 @@ CMakeCache.txt
 .vscode/
 
 # 忽略测试文件
-
+test*
 test*.c
 test*.cpp
 *.data
-!in.data
+
+sy*.c
+
+Out*.c

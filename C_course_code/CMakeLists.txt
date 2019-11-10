@@ -10,6 +10,7 @@ option(Debug
 if(Debug)
 
 add_definitions("-DDebug")
+add_definitions("-Wall -g")
 
 endif(Debug)
 

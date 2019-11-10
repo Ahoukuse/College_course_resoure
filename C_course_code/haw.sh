@@ -12,7 +12,7 @@ then
 elif [ "$1" == "build" ] 
 then
 
-    zip -r "$2.zip" TestModule "$2.c"
+    zip -r -D "${2%%.*}.zip" TestModule  "$2"
 else
     echo "  haw test <文件名> <测试开关 on|off>"
     echo "  haw build <文件名无需后缀>"

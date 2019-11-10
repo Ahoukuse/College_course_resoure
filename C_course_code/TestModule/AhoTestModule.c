@@ -1,5 +1,7 @@
 #include "AhoTestModule.h"
-
+#ifdef Debug
+static char temp[1000] = {0x0};
+#endif // Debug
 int Gen_char(int len,int times){
 #ifdef Debug
 
@@ -45,6 +47,28 @@ int Gen_int(int base,int len,int row,int column){
     return 0;
 }
 
+char* Ran_char(unsigned seed,int len){
+#ifdef Debug
+    srand((unsigned)time(NULL)+seed);
+    for (size_t i = 0; i < 1000; i++)
+    {
+        temp[i] = '\0';
+    }
+    for (size_t i = 0; i < len; i++)
+    {
+        temp[i] = 'a'+rand()%25;
+    }
+    return temp;
+#else 
+    return NULL;
+#endif
+}
+
+int Ran_int(unsigned seed,int base,unsigned len){
+    srand((unsigned)time(NULL)+seed);
+    return rand()%len + base;
+}
+
 void Static_analyze(char *checkfile,int num,int flag){
 #ifdef Debug
     
@@ -77,15 +101,17 @@ void Static_analyze(char *checkfile,int num,int flag){
         switch (flag)
         {
         case 0x01:
-            logg("-----数据[%03lu]-----\n",i+1);
+            
             if(strcmp(tmp,tbcheck)){
+                logg("-----数据[%03lu]-----\n",i+1);
                 logg("期望输出 %s\n",tmp);
                 loggerr("实际输出 %s错误!\n",tbcheck);
             }
             break;
         case 0x10:
-            logg("-----数据[%03lu]-----\n",i+1);
+            
             if(!strcmp(tmp,tbcheck)){
+                logg("-----数据[%03lu]-----\n",i+1);
                 logg("期望输出 %s\n",tmp);
                 loggcyan("实际输出 %s正确!\n",tbcheck);
             }
