@@ -19,6 +19,5 @@ test*.c
 test*.cpp
 *.data
 
-sy*.c
 
 Out*.c
