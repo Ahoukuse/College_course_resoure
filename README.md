@@ -14,7 +14,11 @@
     git clone git@github.com:Ahoukuse/College_course_resoure.git
     cd College_course_resoure
     chmod 775 haw.sh
-    ./haw.sh test2.c on
+    ./haw.sh test.c on
+
+你还要在`C_course_code`创建用于测试的`in.data`和`out.data`文件
+
+    touch in.data out.data
  
 好现在你就可以开始开发了。
 
@@ -22,35 +26,24 @@
 
 放入以下内容
 
-    #include <stdio.h>
-
-    #ifdef Localhost
     #include "TestModule/AhoTestModule.h"
-    #endif // Localhost
 
     int main(int argc, char const *argv[])
     {
-        INIT
-        char str[20] = {0x0};
-        //Gen_char(10,30);
-        TEST_SECTION_BEGIN(7)
-
-        scanf("%s",str);
-        printf("%s\n",str);
-        loggl("%s\n",str);
-
-        TEST_SECTION_END
-
+        INIT                              //  一定要在开头引入 'INIT'
         
+        TEST_SECTION_BEGIN(10)            //在这之中包围的代码会被执行10次
 
-        DROP
-        Static_analyze("check.data",7,SHOWERR | SHOWCURR);
+        /*>>>这里是将被测试的代码<<<*/
+
+        TEST_SECTION_END                  //标示结束
+
+        DROP                              //在return前要引入 'DROP'
         return 0;
     }
 
-`TestModule`头文件的引入要在`Localhost`中进行
 
-要在函数初始化栈时声明`INIT`,同时要在`main`函数结束前`DROP`回收内存
+要在函数初始化栈时声明`INIT`,同时要在`main`函数结束前`DROP`
 
     TEST_SECTION_BEGIN(x)
         ...

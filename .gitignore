@@ -11,7 +11,8 @@ CMakeCache.txt
 
 # 忽略Viual Studio Code Config folder
 
-.vscode/
+c_cpp_properties.json
+settings.json
 
 # 忽略测试文件
 test*
