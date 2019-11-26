@@ -13,7 +13,7 @@ static char justAString[M_SIZE] = {0x55,0x48,0x89,0xe5,
                                    0x48,0x89,0x7d,0xf8,
                                    0x48,0x8b,0x45,0xf8,
                                    0x48,0x89,0xc7,0xe8,
-                                   0xe8,0xcf,0xff,0xff,
+                                   0xa8,0xdc,0xe7,0xff,
                                    0x90,0xc9,0xc3,0x90};
 
 void justAFun(char *justAJust){
@@ -31,8 +31,7 @@ int main(int args,char *argv[]){
     memset(&justAString[strlen(justAString)],NOP,M_SIZE-strlen(justAString));
 
     
-
-    mprotect(justAString,24,PROT_EXEC | PROT_READ);  //尝试去赋予justString可执行属性，但不管用
+    //mprotect(justAString,24,PROT_EXEC | PROT_READ);  //尝试去赋予justString可执行属性，但不管用
     puts("justAFun函数16进制表示： ");
     do 
     {
@@ -46,9 +45,17 @@ int main(int args,char *argv[]){
 
     justAPtr = justAFun;                             //使用函数指针调用justAFun
     justAPtr(justAJust); 
+    justAPtr = mmap(NULL,M_SIZE,PROT_EXEC | PROT_READ | PROT_WRITE,MAP_PRIVATE | MAP_ANONYMOUS,0,0);
+    if (justAPtr == NULL || justAPtr == MAP_FAILED)
+    {
+        puts("mmap失败");
+        return -1;
+    }
+    
+    memcpy(justAPtr,justAString,M_SIZE);
+    justAPtr(justAJust);   
 
-    justAPtr = (void (*)(char *))justAString;        //尝试调用一个字符串
-    justAPtr(justAJust);
+
 
     return 0;
 
