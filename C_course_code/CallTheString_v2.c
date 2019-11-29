@@ -40,7 +40,6 @@ int main(int args,char *argv[]){
     uintptr_t pageStart = start & -pageSize;
     memset(&justAString[strlen(justAString)],NOP,M_SIZE-strlen(justAString));
 
-      //尝试去赋予justString可执行属性，但不管用
     if (mprotect((void *)pageStart,M_SIZE+start-pageStart,PROT_EXEC | PROT_READ | PROT_WRITE) == -1)
     {
        return -1;
